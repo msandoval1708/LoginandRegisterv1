@@ -1,7 +1,7 @@
 package com.apiv1.projectx.service.implementaciones;
 
 import com.apiv1.projectx.modelos.dao.Usuariodao;
-import com.apiv1.projectx.modelos.entidades.CreacionUsuario;
+import com.apiv1.projectx.modelos.entidades.Usuario;
 import com.apiv1.projectx.service.InterfazUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,23 +16,23 @@ public class UsuarioImplementacion implements InterfazUsuario {
     private Usuariodao usuariodao;
 
     @Override
-    public List<CreacionUsuario> listall() {
+    public List<Usuario> listall() {
         return (List) usuariodao.findAll();
     }
 
     @Override
-    public CreacionUsuario save(CreacionUsuario usuario) {
+    public Usuario save(Usuario usuario) {
         return usuariodao.save(usuario);
     }
 
     @Override
-    public CreacionUsuario findById(Integer id) {
+    public Usuario findById(Integer id) {
         return usuariodao.findById(id).orElse(null);
     }
 
     @Transactional
     @Override
-    public void delete(CreacionUsuario usuario) {
+    public void delete(Usuario usuario) {
         usuariodao.delete(usuario);
 
     }

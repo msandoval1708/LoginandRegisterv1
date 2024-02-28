@@ -7,9 +7,8 @@ import lombok.ToString;
 import java.io.Serializable;
 
 @Data
-@ToString
 @Builder
-public class MensajesResponse implements Serializable {
+public class MensajesResponse  {
 
     private String mensaje;
     private Object objeto;

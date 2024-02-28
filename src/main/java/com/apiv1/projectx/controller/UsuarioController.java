@@ -1,31 +1,28 @@
 package com.apiv1.projectx.controller;
 
 import com.apiv1.projectx.modelos.Payload.MensajesResponse;
-import com.apiv1.projectx.modelos.entidades.CreacionUsuario;
+import com.apiv1.projectx.modelos.entidades.Usuario;
 import com.apiv1.projectx.service.InterfazUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1")
 public class UsuarioController {
 
     @Autowired
     private InterfazUsuario usuarioservicio;
 
-    @GetMapping("usuarios")
+    @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<MensajesResponse> showAll() {
         try {
-            List<CreacionUsuario> userList = usuarioservicio.listall();
+            List<Usuario> userList = usuarioservicio.listall();
 
             if (userList.isEmpty()) {
                 return new ResponseEntity<>(MensajesResponse.builder()
@@ -46,11 +43,11 @@ public class UsuarioController {
         }
     }
 
-    @PostMapping("usuario")
+    @PostMapping("creacion")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<MensajesResponse> create(@RequestBody CreacionUsuario usuario) {
+    public ResponseEntity<MensajesResponse> create(@RequestBody Usuario usuario) {
         try {
-            CreacionUsuario nuevoUsuario = usuarioservicio.save(usuario);
+            Usuario nuevoUsuario = usuarioservicio.save(usuario);
             return new ResponseEntity<>(MensajesResponse.builder()
                     .mensaje("Usuario creado exitosamente")
                     .objeto(nuevoUsuario)
@@ -63,11 +60,11 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("usuario")
+    @PutMapping("actualizar")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<MensajesResponse> update(@RequestBody CreacionUsuario usuario) {
+    public ResponseEntity<MensajesResponse> update(@RequestBody Usuario usuario) {
         try {
-            CreacionUsuario usuarioActualizado = usuarioservicio.save(usuario);
+            Usuario usuarioActualizado = usuarioservicio.save(usuario);
             return new ResponseEntity<>(MensajesResponse.builder()
                     .mensaje("Usuario actualizado exitosamente")
                     .objeto(usuarioActualizado)
@@ -83,7 +80,7 @@ public class UsuarioController {
     @DeleteMapping("usuario/{id}")
     public ResponseEntity<MensajesResponse> delete(@PathVariable Integer id) {
         try {
-            CreacionUsuario usuarioDelete = usuarioservicio.findById(id);
+            Usuario usuarioDelete = usuarioservicio.findById(id);
             usuarioservicio.delete(usuarioDelete);
             return new ResponseEntity<>(MensajesResponse.builder()
                     .mensaje("Usuario eliminado exitosamente")
@@ -101,7 +98,7 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<MensajesResponse> showById(@PathVariable Integer id) {
         try {
-            CreacionUsuario usuario = usuarioservicio.findById(id);
+            Usuario usuario = usuarioservicio.findById(id);
             return new ResponseEntity<>(MensajesResponse.builder()
                     .mensaje("Usuario obtenido exitosamente")
                     .objeto(usuario)

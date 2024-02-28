@@ -1,15 +1,15 @@
 package com.apiv1.projectx.service;
 
-import com.apiv1.projectx.modelos.entidades.CreacionUsuario;
+import com.apiv1.projectx.modelos.entidades.Usuario;
 
 import java.util.List;
 
 public interface InterfazUsuario {
 
-    List<CreacionUsuario> listall();
-    CreacionUsuario save(CreacionUsuario usuario);
+    List<Usuario> listall();
+    Usuario save(Usuario usuario);
 
-    CreacionUsuario findById(Integer id);
+    Usuario findById(Integer id);
 
-    void delete(CreacionUsuario usuario);
+    void delete(Usuario usuario);
 }
